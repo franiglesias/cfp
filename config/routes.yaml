@@ -1,4 +1,9 @@
-api_make_proposal:
+api_health:
     path: /api/health
     controller: App\EntryPoint\Api\Controller\HealthController
     methods: GET
+
+api_send_proposal:
+    path: /api/proposals
+    controller: App\EntryPoint\Api\Controller\ProposalController
+    methods: POST

@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Tests\Behat;
+
 use Behat\Behat\Context\Context;
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
