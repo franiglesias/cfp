@@ -1,5 +1,4 @@
-controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: App\Controller
-    type: attribute
+api_make_proposal:
+    path: /api/health
+    controller: App\EntryPoint\Api\Controller\HealthController
+    methods: GET
