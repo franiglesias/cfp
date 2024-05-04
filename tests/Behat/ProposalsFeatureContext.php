@@ -7,6 +7,7 @@ namespace App\Tests\Behat;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
 use GuzzleHttp\Client;
+use GuzzleHttp\Cookie\CookieJar;
 use Psr\Http\Message\ResponseInterface;
 use function PHPUnit\Framework\assertEquals;
 

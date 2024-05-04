@@ -2,14 +2,14 @@
 
 declare (strict_types=1);
 
-namespace App\EntryPoint\Api\Controller;
+namespace App\ForSendProposals;
 
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-final class ProposalController
+final class SendProposalController
 {
     public function __invoke(Request $request): Response
     {

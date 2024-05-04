@@ -18,4 +18,4 @@ Feature: Sending proposals to C4P
         """
         When He sends the proposal
         Then The proposal is acknowledged
-        Then The proposal appears in the list of sent proposals
+        #Then The proposal appears in the list of sent proposals

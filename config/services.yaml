@@ -26,3 +26,7 @@ services:
     App\EntryPoint\Api\Controller\:
         resource: '../src/EntryPoint/Api/Controller/'
         tags: [ 'controller.service_arguments' ]
+
+    App\ForSendProposals\SendProposalController:
+        class:  App\ForSendProposals\SendProposalController
+        tags: [ 'controller.service_arguments' ]
