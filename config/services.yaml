@@ -27,6 +27,7 @@ services:
         resource: '../src/EntryPoint/Api/Controller/'
         tags: [ 'controller.service_arguments' ]
 
-    App\ForSendProposals\SendProposalController:
+    App\ForSendProposals\SendProposal\SendProposalController:
         class:  App\ForSendProposals\SendProposal\SendProposalController
         tags: [ 'controller.service_arguments' ]
+        autowire: true

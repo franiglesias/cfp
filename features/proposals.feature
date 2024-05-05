@@ -9,7 +9,7 @@ Feature: Sending proposals to C4P
         {
             "title": "Proposal Title",
             "description": "A description or abstract of the proposal",
-            "autor": "Fran Iglesias",
+            "author": "Fran Iglesias",
             "email": "fran.iglesias@ezxample.com",
             "type": "talk",
             "sponsored": true,
