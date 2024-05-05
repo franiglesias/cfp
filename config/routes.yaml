@@ -5,5 +5,5 @@ api_health:
 
 api_send_proposal:
     path: /api/proposals
-    controller: App\ForSendProposals\SendProposalController
+    controller: App\ForSendProposals\SendProposal\SendProposalController
     methods: POST

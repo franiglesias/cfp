@@ -28,5 +28,5 @@ services:
         tags: [ 'controller.service_arguments' ]
 
     App\ForSendProposals\SendProposalController:
-        class:  App\ForSendProposals\SendProposalController
+        class:  App\ForSendProposals\SendProposal\SendProposalController
         tags: [ 'controller.service_arguments' ]
