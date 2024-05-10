@@ -1,7 +1,8 @@
 <?php
 
-namespace App\ForSendProposals\SendProposal;
+namespace App\ForSendProposals\SendProposal\StoreProposal;
 
+use App\ForSendProposals\SendProposal\Proposal;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

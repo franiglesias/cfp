@@ -5,6 +5,8 @@ declare (strict_types=1);
 namespace App\ForSendProposals\SendProposal;
 
 
+use App\ForSendProposals\SendProposal\StoreProposal\StoreProposal;
+
 class SendProposalHandler
 {
     private StoreProposal $storeProposal;

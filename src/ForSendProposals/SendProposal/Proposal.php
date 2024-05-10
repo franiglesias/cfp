@@ -2,6 +2,7 @@
 
 namespace App\ForSendProposals\SendProposal;
 
+use App\ForSendProposals\SendProposal\StoreProposal\ProposalRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 

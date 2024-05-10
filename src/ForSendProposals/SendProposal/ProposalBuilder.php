@@ -5,6 +5,9 @@ declare (strict_types=1);
 namespace App\ForSendProposals\SendProposal;
 
 
+use App\ForSendProposals\SendProposal\Clock\Clock;
+use App\ForSendProposals\SendProposal\IdentityProvider\IdentityProvider;
+
 final class ProposalBuilder
 {
     private IdentityProvider $identityProvider;

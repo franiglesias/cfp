@@ -2,8 +2,10 @@
 
 declare (strict_types=1);
 
-namespace App\ForSendProposals\SendProposal;
+namespace App\ForSendProposals\SendProposal\StoreProposal;
 
+
+use App\ForSendProposals\SendProposal\Proposal;
 
 interface StoreProposal
 {

@@ -4,11 +4,11 @@ declare (strict_types=1);
 
 namespace App\Tests\ForSendProposals\SendProposal;
 
-use App\ForSendProposals\SendProposal\Clock;
-use App\ForSendProposals\SendProposal\IdentityProvider;
+use App\ForSendProposals\SendProposal\Clock\Clock;
+use App\ForSendProposals\SendProposal\IdentityProvider\IdentityProvider;
 use App\ForSendProposals\SendProposal\ProposalBuilder;
 use App\ForSendProposals\SendProposal\SendProposalHandler;
-use App\ForSendProposals\SendProposal\StoreProposal;
+use App\ForSendProposals\SendProposal\StoreProposal\StoreProposal;
 use DateTimeImmutable;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
