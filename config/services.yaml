@@ -31,3 +31,12 @@ services:
         class:  App\ForSendProposals\SendProposal\SendProposalController
         tags: [ 'controller.service_arguments' ]
         autowire: true
+
+    App\ForSendProposals\SendProposal\DoctrineStoreProposal: ~
+    App\ForSendProposals\SendProposal\StoreProposal: '@App\ForSendProposals\SendProposal\DoctrineStoreProposal'
+    
+    App\ForSendProposals\SendProposal\UlidIdentityProvider: ~
+    App\ForSendProposals\SendProposal\IdentityProvider: '@App\ForSendProposals\SendProposal\UlidIdentityProvider'
+    
+    App\ForSendProposals\SendProposal\SystemClock: ~
+    App\ForSendProposals\SendProposal\Clock: '@App\ForSendProposals\SendProposal\SystemClock'

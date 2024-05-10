@@ -7,8 +7,29 @@ namespace App\ForSendProposals\SendProposal;
 
 class SendProposalHandler
 {
+    private StoreProposal $storeProposal;
+    private ProposalBuilder $builder;
+
+    public function __construct(
+        StoreProposal $storeProposal,
+        ProposalBuilder $builder
+    )
+    {
+        $this->storeProposal = $storeProposal;
+        $this->builder = $builder;
+    }
+
     public function __invoke(SendProposal $command): SendProposalResponse
     {
-        throw new \RuntimeException('Implement __invoke() method.');
+        $proposal = $this->builder->fromCommandData($command);
+
+        try {
+            ($this->storeProposal)($proposal);
+            return new SendProposalResponse(true, $proposal->getId(),
+                $proposal->getTitle());
+        } catch (\Exception $e) {
+            return new SendProposalResponse(false, $proposal->getId(),
+                $e->getMessage());
+        }
     }
 }

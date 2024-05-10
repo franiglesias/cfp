@@ -10,7 +10,7 @@ final readonly class SendProposal
     public function __construct(
         public string $title,
         public string $description,
-        public string $name,
+        public string $author,
         public string $email,
         public string $type,
         public bool   $sponsored,
