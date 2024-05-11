@@ -31,6 +31,11 @@ services:
         class:  App\ForSendProposals\SendProposal\SendProposalController
         tags: [ 'controller.service_arguments' ]
         autowire: true
+        
+    App\ForSendProposals\ReadProposal\ReadProposalController:
+        class: App\ForSendProposals\ReadProposal\ReadProposalController
+        tags: [ 'controller.service_arguments' ]
+        autowire: true
 
     App\ForSendProposals\SendProposal\StoreProposal\DoctrineStoreProposal: ~
     App\ForSendProposals\SendProposal\StoreProposal\StoreProposal: '@App\ForSendProposals\SendProposal\StoreProposal\DoctrineStoreProposal'

@@ -5,6 +5,7 @@ declare (strict_types=1);
 namespace App\Tests\Behat;
 
 use Behat\Behat\Context\Context;
+use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode;
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
@@ -54,10 +55,27 @@ class ProposalsFeatureContext implements Context
     }
 
     /**
-     * @Then /^The proposal appears in the list of sent proposals$/
+     * @Then /^Fran can see the proposal with the "([^"]*)" status$/
      */
-    public function theProposalAppearsInTheListOfSentProposals()
+    public function franCanSeeTheProposalWithTheStatus($status)
     {
-        throw new \Behat\Behat\Tester\Exception\PendingException();
+        $loc = $this->response->getHeader('Location')[0];
+
+        $client = new Client();
+        $response = $client->request(
+            'GET',
+            $loc,
+            [
+                'headers' => [
+                    'Content-Type' => 'application/json'
+                ]
+            ]
+        );
+        assertEquals(200, $response->getStatusCode());
+        $body = json_decode($response->getBody()->getContents(), true);
+        assertEquals($status, $body['status']);
+
+        $proposal = json_decode($this->payload);
+        assertEquals($proposal['title'], $body['title']);
     }
 }
