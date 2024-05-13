@@ -75,7 +75,7 @@ class ProposalsFeatureContext implements Context
         $body = json_decode($response->getBody()->getContents(), true);
         assertEquals($status, $body['status']);
 
-        $proposal = json_decode($this->payload);
+        $proposal = json_decode($this->payload, true);
         assertEquals($proposal['title'], $body['title']);
     }
 }

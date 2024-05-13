@@ -7,7 +7,7 @@ namespace App\ForSendProposals\ReadProposal;
 
 use DateTimeImmutable;
 
-final readonly class ReadProposalResponse
+final readonly class Proposal
 {
 
     public function __construct(
@@ -21,6 +21,7 @@ final readonly class ReadProposalResponse
         public string $location,
         public string $status,
         public DateTimeImmutable $receivedAt
-    ) {
+    )
+    {
     }
 }

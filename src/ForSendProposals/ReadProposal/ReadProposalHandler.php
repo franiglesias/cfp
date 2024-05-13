@@ -7,8 +7,29 @@ namespace App\ForSendProposals\ReadProposal;
 
 class ReadProposalHandler
 {
-    public function __invoke()
+    private RetrieveProposal $retrieveProposal;
+
+    public function __construct(RetrieveProposal $retrieveProposal)
     {
-        throw new \RuntimeException('Implement ReadProposalHandler.__invoke() method.');
+        $this->retrieveProposal = $retrieveProposal;
+    }
+
+
+    public function __invoke(ReadProposal $readProposal): ReadProposalResponse
+    {
+        $proposal = ($this->retrieveProposal)($readProposal->id);
+
+        return new ReadProposalResponse(
+            $proposal->id,
+            $proposal->title,
+            $proposal->description,
+            $proposal->author,
+            $proposal->email,
+            $proposal->type,
+            $proposal->sponsored,
+            $proposal->location,
+            $proposal->status,
+            $proposal->receivedAt,
+        );
     }
 }
