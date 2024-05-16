@@ -4,59 +4,71 @@ declare (strict_types=1);
 
 namespace App\Tests\ForSendProposals\ReadProposal;
 
-use App\ForSendProposals\ReadProposal\ReadProposal;
+use App\ForSendProposals\ReadProposal\Proposal;
 use App\ForSendProposals\ReadProposal\ReadProposalController;
 use App\ForSendProposals\ReadProposal\ReadProposalHandler;
-use App\ForSendProposals\ReadProposal\ReadProposalResponse;
+use App\ForSendProposals\ReadProposal\RetrieveProposal;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use function PHPUnit\Framework\assertEquals;
 
 final class ReadProposalControllerTest extends TestCase
 {
+    public const string PROPOSAL_ID = '01HXMBMMXAG7S1ZFZH98HS3CHP';
+    public const string NOW = '2024-05-15 12:34:56';
+
     /** @test */
     public function should_retrieve_proposal_by_id(): void
     {
-        $id = '01HXMBMMXAG7S1ZFZH98HS3CHP';
-        $receivedAt = new \DateTimeImmutable();
+        $handler = new ReadProposalHandler($this->buildRetrieveProposalDouble());
+        $controller = new ReadProposalController($handler);
 
-        $request = Request::create(
-            '/api/proposals/'.$id,
+        $request = $this->buildRequest('/api/proposals/' . self::PROPOSAL_ID);
+        $response = ($controller)(self::PROPOSAL_ID, $request);
+
+        assertEquals(200, $response->getStatusCode());
+        assertEquals($this->buildExpectedPayload(), $response->getContent());
+    }
+
+    private function buildRetrieveProposalDouble(): RetrieveProposal
+    {
+        return new class() implements RetrieveProposal {
+
+            public function __invoke(string $id): Proposal
+            {
+                return new Proposal(
+                    ReadProposalControllerTest::PROPOSAL_ID,
+                    'Proposal Title',
+                    'A description or abstract of the proposal',
+                    'Fran Iglesias',
+                    'fran.iglesias@example.com',
+                    'talk',
+                    true,
+                    'Vigo, Galicia',
+                    'waiting',
+                    new \DateTimeImmutable(ReadProposalControllerTest::NOW),
+                );
+            }
+        };
+    }
+
+    private function buildRequest(string $uri): Request
+    {
+        return Request::create(
+            $uri,
             'GET',
             [],
             [],
             [],
             ['CONTENT-TYPE' => 'json/application'],
         );
+    }
 
-        $handler = $this->createMock(ReadProposalHandler::class);
-
-        $query = new ReadProposal($id);
-
-        $expected = new ReadProposalResponse(
-            $id,
-            'Proposal Title',
-            'A description or abstract of the proposal',
-            'Fran Iglesias',
-            'fran.iglesias@example.com',
-            'talk',
-            true,
-            'Vigo, Galicia',
-            'waiting',
-            $receivedAt,
-        );
-
-        $handler
-            ->method('__invoke')
-            ->with($query)
-            ->willReturn($expected);
-
-        $controller = new ReadProposalController($handler);
-        $response = ($controller)($id, $request);
-
-        $body = json_encode(
+    private function buildExpectedPayload(): string|false
+    {
+        return json_encode(
             [
-                'id' => $id,
+                'id' => self::PROPOSAL_ID,
                 'title' => 'Proposal Title',
                 'description' => 'A description or abstract of the proposal',
                 'author' => 'Fran Iglesias',
@@ -65,11 +77,8 @@ final class ReadProposalControllerTest extends TestCase
                 'sponsored' => true,
                 'location' => 'Vigo, Galicia',
                 'status' => 'waiting',
-                'receivedAt' => $receivedAt,
+                'receivedAt' => new \DateTimeImmutable(self::NOW),
             ]
         );
-
-        assertEquals(200, $response->getStatusCode());
-        assertEquals($body, $response->getContent());
     }
 }
