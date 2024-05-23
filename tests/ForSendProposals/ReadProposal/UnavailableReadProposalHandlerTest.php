@@ -6,13 +6,11 @@ namespace App\Tests\ForSendProposals\ReadProposal;
 
 use App\ForSendProposals\ReadProposal\Proposal;
 use App\ForSendProposals\ReadProposal\ProposalNotAvailable;
-use App\ForSendProposals\ReadProposal\ReadingProposalException;
 use App\ForSendProposals\ReadProposal\ReadProposal;
 use App\ForSendProposals\ReadProposal\ReadProposalHandler;
-use App\ForSendProposals\ReadProposal\ReadProposalResponse;
-use App\ForSendProposals\ReadProposal\RetrieveProposal;
+use App\ForSendProposals\ReadProposal\RetrieveProposal\ReadingProposalException;
+use App\ForSendProposals\ReadProposal\RetrieveProposal\RetrieveProposal;
 use PHPUnit\Framework\TestCase;
-use function PHPUnit\Framework\assertEquals;
 
 final class UnavailableReadProposalHandlerTest extends TestCase implements RetrieveProposal
 {

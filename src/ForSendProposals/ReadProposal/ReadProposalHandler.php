@@ -5,6 +5,9 @@ declare (strict_types=1);
 namespace App\ForSendProposals\ReadProposal;
 
 
+use App\ForSendProposals\ReadProposal\RetrieveProposal\ReadingProposalException;
+use App\ForSendProposals\ReadProposal\RetrieveProposal\RetrieveProposal;
+
 class ReadProposalHandler
 {
     private RetrieveProposal $retrieveProposal;

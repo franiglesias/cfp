@@ -4,13 +4,13 @@ declare (strict_types=1);
 
 namespace App\Tests\ForSendProposals\ReadProposal;
 
-use App\ForSendProposals\ReadProposal\DBALRetrieveProposal;
-use App\ForSendProposals\ReadProposal\ReadingProposalException;
+use App\ForSendProposals\ReadProposal\RetrieveProposal\DBALRetrieveProposal;
+use App\ForSendProposals\ReadProposal\RetrieveProposal\ReadingProposalException;
+use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\DBAL\Result;
 use PHPUnit\Framework\TestCase;
-use Doctrine\DBAL\Connection;
 
 final class DBALRetrieveProposalTest extends TestCase
 {

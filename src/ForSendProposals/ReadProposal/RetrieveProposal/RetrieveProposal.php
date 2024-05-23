@@ -2,8 +2,10 @@
 
 declare (strict_types=1);
 
-namespace App\ForSendProposals\ReadProposal;
+namespace App\ForSendProposals\ReadProposal\RetrieveProposal;
 
+
+use App\ForSendProposals\ReadProposal\Proposal;
 
 interface RetrieveProposal
 {

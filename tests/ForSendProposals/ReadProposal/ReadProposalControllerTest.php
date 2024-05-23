@@ -7,7 +7,7 @@ namespace App\Tests\ForSendProposals\ReadProposal;
 use App\ForSendProposals\ReadProposal\Proposal;
 use App\ForSendProposals\ReadProposal\ReadProposalController;
 use App\ForSendProposals\ReadProposal\ReadProposalHandler;
-use App\ForSendProposals\ReadProposal\RetrieveProposal;
+use App\ForSendProposals\ReadProposal\RetrieveProposal\RetrieveProposal;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use function PHPUnit\Framework\assertEquals;
