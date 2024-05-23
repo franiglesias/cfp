@@ -17,7 +17,11 @@ class ReadProposalHandler
 
     public function __invoke(ReadProposal $readProposal): ReadProposalResponse
     {
-        $proposal = ($this->retrieveProposal)($readProposal->id);
+        try {
+            $proposal = ($this->retrieveProposal)($readProposal->id);
+        } catch (ReadingProposalException $e) {
+            throw new ProposalNotAvailable('Could not find Proposal', $e->getCode(), $e);
+        }
 
         return new ReadProposalResponse(
             $proposal->id,
