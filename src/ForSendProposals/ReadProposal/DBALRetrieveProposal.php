@@ -5,8 +5,11 @@ declare (strict_types=1);
 namespace App\ForSendProposals\ReadProposal;
 
 
+use DateMalformedStringException;
 use DateTimeImmutable;
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception as DBALException;
+use Exception;
 
 final class DBALRetrieveProposal implements RetrieveProposal
 {
@@ -18,6 +21,9 @@ final class DBALRetrieveProposal implements RetrieveProposal
     }
 
 
+    /**
+     * @throws ReadingProposalException
+     */
     public function __invoke(string $id): Proposal
     {
         $builder = $this->connection->createQueryBuilder();
@@ -38,21 +44,38 @@ final class DBALRetrieveProposal implements RetrieveProposal
             ->where('id = ?')
             ->setParameter(0, $id);
 
-        $result = $query->executeQuery();
+        try {
+            $result = $query->executeQuery();
+        } catch (DBALException $e) {
+            throw new ReadingProposalException('Query to DB failed', 1, $e);
+        }
 
-        $readProposal = $result->fetchAssociative();
+        try {
+            $readProposal = $result->fetchAssociative();
+        } catch (DBALException $e) {
+            // Change the exception type if you need more resolution here
+            throw new ReadingProposalException('Failed extracting data from result',
+                2, $e);
+        }
 
-        return new Proposal(
-            $readProposal['id'],
-            $readProposal['title'],
-            $readProposal['description'],
-            $readProposal['author'],
-            $readProposal['email'],
-            $readProposal['type'],
-            $readProposal['sponsored'],
-            $readProposal['location'],
-            $readProposal['status'],
-            new DateTimeImmutable($readProposal['received_at'])
-        );
+        try {
+            $proposal = new Proposal(
+                $readProposal['id'],
+                $readProposal['title'],
+                $readProposal['description'],
+                $readProposal['author'],
+                $readProposal['email'],
+                $readProposal['type'],
+                $readProposal['sponsored'],
+                $readProposal['location'],
+                $readProposal['status'],
+                new DateTimeImmutable($readProposal['received_at'])
+            );
+        } catch (DateMalformedStringException|Exception $e) {
+            throw new ReadingProposalException('Data could be corrupted', 3,
+                $e);
+        }
+
+        return $proposal;
     }
 }
