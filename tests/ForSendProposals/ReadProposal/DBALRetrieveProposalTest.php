@@ -4,6 +4,7 @@ declare (strict_types=1);
 
 namespace App\Tests\ForSendProposals\ReadProposal;
 
+use App\ForSendProposals\ReadProposal\RetrieveProposal\DataNotFound;
 use App\ForSendProposals\ReadProposal\RetrieveProposal\DBALRetrieveProposal;
 use App\ForSendProposals\ReadProposal\RetrieveProposal\ReadingProposalException;
 use Doctrine\DBAL\Connection;
@@ -88,6 +89,28 @@ final class DBALRetrieveProposalTest extends TestCase
         $connection->method('createQueryBuilder')->willReturn($builder);
 
         $this->expectException(ReadingProposalException::class);
+        ($dbalRetrieveProposal)('01HYGW7NKM6JGGQ9NM2A4VY5SG');
+    }
+
+    /** @test */
+    public function should_manage_no_result(): void
+    {
+        $connection = $this->createMock(Connection::class);
+        $dbalRetrieveProposal = new DBALRetrieveProposal($connection);
+
+        $result = $this->createMock(Result::class);
+        $result->method('fetchAssociative')->willReturn(false);
+
+        $builder = $this->createMock(QueryBuilder::class);
+        $builder->method('select')->willReturn($builder);
+        $builder->method('from')->willReturn($builder);
+        $builder->method('where')->willReturn($builder);
+        $builder->method('setParameter')->willReturn($builder);
+        $builder->method('executeQuery')->willReturn($result);
+
+        $connection->method('createQueryBuilder')->willReturn($builder);
+
+        $this->expectException(DataNotFound::class);
         ($dbalRetrieveProposal)('01HYGW7NKM6JGGQ9NM2A4VY5SG');
     }
 }

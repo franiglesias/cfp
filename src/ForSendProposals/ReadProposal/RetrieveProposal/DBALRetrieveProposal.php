@@ -59,6 +59,10 @@ final class DBALRetrieveProposal implements RetrieveProposal
                 2, $e);
         }
 
+        if (!$readProposal) {
+            throw new DataNotFound("Proposal with id $id was not found");
+        }
+
         try {
             $proposal = new Proposal(
                 $readProposal['id'],

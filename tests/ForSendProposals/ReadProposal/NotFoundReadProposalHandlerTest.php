@@ -6,13 +6,15 @@ namespace App\Tests\ForSendProposals\ReadProposal;
 
 use App\ForSendProposals\ReadProposal\Proposal;
 use App\ForSendProposals\ReadProposal\ProposalNotAvailable;
+use App\ForSendProposals\ReadProposal\ProposalNotFound;
 use App\ForSendProposals\ReadProposal\ReadProposal;
 use App\ForSendProposals\ReadProposal\ReadProposalHandler;
+use App\ForSendProposals\ReadProposal\RetrieveProposal\DataNotFound;
 use App\ForSendProposals\ReadProposal\RetrieveProposal\ReadingProposalException;
 use App\ForSendProposals\ReadProposal\RetrieveProposal\RetrieveProposal;
 use PHPUnit\Framework\TestCase;
 
-final class UnavailableReadProposalHandlerTest extends TestCase implements RetrieveProposal
+final class NotFoundReadProposalHandlerTest extends TestCase implements RetrieveProposal
 {
     private const string PROPOSAL_ID = '01HXE2R5JBCRKAA3K0BZ1TCXT2';
 
@@ -22,17 +24,15 @@ final class UnavailableReadProposalHandlerTest extends TestCase implements Retri
         $handler = new ReadProposalHandler($this);
         $command = new ReadProposal(self::PROPOSAL_ID);
 
-        $this->expectException(ProposalNotAvailable::class);
+        $this->expectException(ProposalNotFound::class);
 
         ($handler)($command);
     }
 
     public function __invoke(string $id): Proposal
     {
-        throw new ReadingProposalException(
-            'some exception',
-            1,
-            new \Exception('some DB exception')
+        throw new DataNotFound(
+            'some exception'
         );
     }
 }
