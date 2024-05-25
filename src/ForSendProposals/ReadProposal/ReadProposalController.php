@@ -27,33 +27,14 @@ final class ReadProposalController
             $query = new ReadProposal($id);
             $response = ($this->handler)($query);
         } catch (InvalidUlidStringException $e) {
-            return $this->failureResponse(
-                sprintf('Invalid Id: %s', $id),
-                Response::HTTP_BAD_REQUEST
-            );
+            return new BadRequestResponse(sprintf('Invalid Id: %s', $id));
         } catch (ProposalNotFound $e) {
-            return $this->failureResponse(
-                $e->getMessage(),
-                Response::HTTP_NOT_FOUND
-            );
+            return new NotFoundResponse($e->getMessage());
         } catch (ProposalNotAvailable $e) {
-            return $this->failureResponse(
-                $e->getMessage(),
-                Response::HTTP_INTERNAL_SERVER_ERROR
-            );
+            return new ServerErrorResponse($e->getMessage());
         }
 
         return new JsonResponse($response, Response::HTTP_OK);
-    }
-
-    private function failureResponse(string $message, int $status): JsonResponse
-    {
-        $response = [
-            'errors' => [
-                $message
-            ],
-        ];
-        return new JsonResponse($response, $status);
     }
 
     private function validateId(string $id): void
