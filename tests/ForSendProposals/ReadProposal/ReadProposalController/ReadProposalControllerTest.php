@@ -2,7 +2,7 @@
 
 declare (strict_types=1);
 
-namespace App\Tests\ForSendProposals\ReadProposal;
+namespace App\Tests\ForSendProposals\ReadProposal\ReadProposalController;
 
 use App\ForSendProposals\ReadProposal\Proposal;
 use App\ForSendProposals\ReadProposal\ReadProposalController;

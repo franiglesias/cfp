@@ -2,15 +2,13 @@
 
 declare (strict_types=1);
 
-namespace App\Tests\ForSendProposals\ReadProposal;
+namespace App\Tests\ForSendProposals\ReadProposal\ReadProposalHandler;
 
 use App\ForSendProposals\ReadProposal\Proposal;
-use App\ForSendProposals\ReadProposal\ProposalNotAvailable;
 use App\ForSendProposals\ReadProposal\ProposalNotFound;
 use App\ForSendProposals\ReadProposal\ReadProposal;
 use App\ForSendProposals\ReadProposal\ReadProposalHandler;
 use App\ForSendProposals\ReadProposal\RetrieveProposal\DataNotFound;
-use App\ForSendProposals\ReadProposal\RetrieveProposal\ReadingProposalException;
 use App\ForSendProposals\ReadProposal\RetrieveProposal\RetrieveProposal;
 use PHPUnit\Framework\TestCase;
 
