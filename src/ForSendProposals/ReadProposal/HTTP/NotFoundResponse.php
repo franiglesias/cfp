@@ -2,12 +2,12 @@
 
 declare (strict_types=1);
 
-namespace App\ForSendProposals\ReadProposal;
+namespace App\ForSendProposals\ReadProposal\HTTP;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-class ServerErrorResponse extends JsonResponse
+class NotFoundResponse extends JsonResponse
 {
     public function __construct(mixed $message)
     {
@@ -16,6 +16,6 @@ class ServerErrorResponse extends JsonResponse
                 $message
             ],
         ];
-        parent::__construct($response, Response::HTTP_INTERNAL_SERVER_ERROR);
+        parent::__construct($response, Response::HTTP_NOT_FOUND);
     }
 }

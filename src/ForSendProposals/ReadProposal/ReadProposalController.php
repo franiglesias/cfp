@@ -5,6 +5,9 @@ declare (strict_types=1);
 namespace App\ForSendProposals\ReadProposal;
 
 
+use App\ForSendProposals\ReadProposal\HTTP\BadRequestResponse;
+use App\ForSendProposals\ReadProposal\HTTP\NotFoundResponse;
+use App\ForSendProposals\ReadProposal\HTTP\ServerErrorResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
