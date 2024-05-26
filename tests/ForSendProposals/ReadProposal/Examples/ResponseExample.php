@@ -4,7 +4,7 @@ declare (strict_types=1);
 
 namespace App\Tests\ForSendProposals\ReadProposal\Examples;
 
-class ResponseMother
+class ResponseExample
 {
     public static function failedWithMessage(string $message): string
     {

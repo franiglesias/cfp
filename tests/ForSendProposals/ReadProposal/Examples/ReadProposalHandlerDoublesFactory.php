@@ -11,7 +11,7 @@ use App\ForSendProposals\ReadProposal\ReadProposalHandler;
 use App\ForSendProposals\ReadProposal\ReadProposalResponse;
 use RuntimeException;
 
-class ReadProposalHandlerMother
+class ReadProposalHandlerDoublesFactory
 {
     public static function dummy(): ReadProposalHandler
     {

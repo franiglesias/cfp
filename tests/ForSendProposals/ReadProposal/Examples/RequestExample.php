@@ -6,7 +6,7 @@ namespace App\Tests\ForSendProposals\ReadProposal\Examples;
 
 use Symfony\Component\HttpFoundation\Request;
 
-class RequestMother
+class RequestExample
 {
     public static function get(string $uri): Request
     {
